@@ -24,7 +24,10 @@ class Transfer
   end
   
   def reverse_transaction
-    
+    if self.status == "complete"
+      receiver.withdrawal(self.amount) && sender.deposit(self.amount)
+      self.status = "reversed"
+    end
   end
   
 end
